@@ -5,15 +5,15 @@ library(dplyr)
 library(caret)
 
 # Listando os arquivos
-lista_abio <- list.files("dados/abioticos/presente", full.names = TRUE)
-
-# Selecioando apenas as variaveis de temperatura e salinidade
-lista_abio <- grep(x = lista_abio, pattern = "Temperature|Salinity", value = TRUE)
-
+lista_abio <- list.files("dados/abioticos/presente/",
+                         pattern = "tif$", full.names = TRUE)
 lista_abio
 
 # Importando as variáveis preditoras
 preditoras <- stack(lista_abio)
+
+# Plotando a primeira variável
+plot(preditoras[[1]])
 
 # Criando uma tabela com os valores por pixel
 tabela_preditoras <- na.omit(preditoras[])
@@ -25,6 +25,7 @@ View(tabela_preditoras)
 # Matriz de correlação
 cor_mat <- cor(tabela_preditoras)
 
+# Plot da matriz de correlação (exemplo1)
 corrplot(cor_mat, method = "color",
          type = "upper", order = "hclust",
          addCoef.col = "black",
@@ -51,12 +52,12 @@ corrplot(cor_mat_sel, method = "color",
          diag = FALSE)
 
 # Criando a pasta para receber as variaveis selecionadas
-if(!dir.exists("dados/abioticos/selecionados/futuro/")){dir.create("dados/abioticos/selecionados/futuro/", recursive = TRUE)}
+if(!dir.exists("dados/abioticos/selecionados/presente/")){dir.create("dados/abioticos/selecionados/presente/", recursive = TRUE)}
 
 # Salvando as variáveis no disco
 for(i in 1:nlayers(preditoras_selecionadas)){
   writeRaster(preditoras_selecionadas[[i]],
-              filename = paste0("dados/abioticos/selecionados/futuro/",
+              filename = paste0("dados/abioticos/selecionados/presente/",
                                 names(preditoras_selecionadas)[i], ".tif"),
               options = "COMPRESS=DEFLATE",
               overwrite = TRUE)

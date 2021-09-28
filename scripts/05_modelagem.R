@@ -54,3 +54,8 @@ modelo_maxent_proj <- predict(preditoras, modelo_maxent)
 
 # Plotando
 plot(modelo_maxent_proj)
+
+# Plotando os dois modelos
+par(mfrow = c(1,2))
+plot(modelo_bioclim_proj, main = "bioclim")
+plot(modelo_maxent_proj, main = "maxent")

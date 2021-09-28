@@ -3,7 +3,7 @@ library(raster)
 library(dismo)
 
 # Carregando as variaveis abioticas do presente
-lista_presente <- list.files("dados/abioticos/selecionados/futuro/", pattern = "tif$", full.names = TRUE)
+lista_presente <- list.files("dados/abioticos/selecionados/presente/", pattern = "tif$", full.names = TRUE)
 
 lista_presente
 
@@ -12,15 +12,15 @@ preditoras_presente <- stack(lista_presente)
 preditoras_presente
 
 # Carregando as variaveis abioticas do futuro
-lista_futuro <- list.files("dados/abioticos/futuro/RCP85_2100/", pattern = "tif$", full.names = TRUE)
+lista_futuro <- list.files("dados/abioticos/selecionados/futuro/2050_miroc_ssp245/", pattern = "tif$", full.names = TRUE)
 
 lista_futuro
 
 # Selecionando as mesmas variáveis do presente
-ponteiro <- basename(lista_futuro) %in% basename(lista_presente)
-lista_futuro <- lista_futuro[ponteiro]
-
-lista_futuro
+# ponteiro <- basename(lista_futuro) %in% basename(lista_presente)
+# lista_futuro <- lista_futuro[ponteiro]
+#
+# lista_futuro
 
 # Importando as variaveis abióticas do futuro
 preditoras_futuro <- stack(lista_futuro)
@@ -43,14 +43,10 @@ modelo_bioclim <- bioclim(preditoras_presente, occ)
 modelo_bioclim_proj_presente <- predict(preditoras_presente, modelo_bioclim)
 modelo_bioclim_proj_futuro <- predict(preditoras_futuro, modelo_bioclim)
 
-# Plotando
-plot(modelo_bioclim_proj_presente)
-plot(modelo_bioclim_proj_futuro)
-
 # Plotando lado a lado
-modelos_bioclim <- stack(modelo_bioclim_proj_presente, modelo_bioclim_proj_futuro)
-names(modelos_bioclim) <- c("presente", "futuro")
-plot(modelos_bioclim)
+par(mfrow = c(1,2))
+plot(modelo_bioclim_proj_presente, main = "presente")
+plot(modelo_bioclim_proj_futuro, main = "futuro")
 
 
 # MAXENT ------------------------------------------------------------------
@@ -63,9 +59,9 @@ modelo_maxent_proj_presente <- predict(preditoras_presente, modelo_maxent)
 modelo_maxent_proj_futuro <- predict(preditoras_futuro, modelo_maxent)
 
 # Plotando
-modelos_maxent <- stack(modelo_maxent_proj_presente, modelo_maxent_proj_futuro)
-names(modelos_maxent) <- c("presente", "futuro")
-plot(modelos_maxent)
+par(mfrow = c(1,2))
+plot(modelo_maxent_proj_presente, main = "presente")
+plot(modelo_maxent_proj_futuro, main = "futuro")
 
 # Salvando o geotiff dos modelos no disco
 writeRaster(modelo_bioclim_proj_presente, "resultados/bioclim_presente.tif")
