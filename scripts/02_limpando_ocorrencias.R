@@ -1,9 +1,9 @@
 # Carregando os pacotes ---------------------------------------------------
 library(raster)
 library(dismo)
-library(dplyr)
 library(CoordinateCleaner)
 library(vroom)
+library(dplyr)
 source("funcoes/ver_mapa.R")
 
 # Importando os pontos de ocorrência --------------------------------------
@@ -31,40 +31,37 @@ occ_clean <- clean_coordinates(occ_raw, species = "species",
 nrow(occ_clean)
 
 # Selecionando as colunas longitude e latitude
-occ_clean <- select(occ_clean, decimalLongitude, decimalLatitude)
+occ_clean <- dplyr::select(occ_clean, decimalLongitude, decimalLatitude)
 
 # Importando uma variável preditora
-var1 <- raster('dados/abioticos/presente/Phosphate.Range.tif')
+var1 <- raster('dados/abioticos/presente/wc2.1_10m_bio_1.tif')
 
-# Salvando o tabela com os registros únicos
+# Salvando o tabela com os registros únicos por pixel
 occ_unique <- gridSample(occ_clean, var1, n = 1)
 
 # Resetando os nomes das linhas
 rownames(occ_unique) <- NULL
+
+# Número de ocorrências únicas
+nrow(occ_unique)
 
 # Visualizando os pontos no mapa interativo
 ver_pontos(occ_unique, lon = 'decimalLongitude', lat = 'decimalLatitude',
            plot_raster = var1)
 
 # Removendo dados com 'NA'
-occ_unique_with_values <- occ_unique[!is.na(extract(var1, occ_unique)),]
+occ_modelagem <- occ_unique[!is.na(extract(var1, occ_unique)),]
 
 # Resetando os nomes das linhas
-rownames(occ_unique_with_values) <- NULL
+rownames(occ_modelagem) <- NULL
 
-# Visualizando os pontos no mapa interativo
-ver_pontos(occ_unique_with_values,
-           lon = 'decimalLongitude', lat = 'decimalLatitude')
-
-# Removendo dados inconsistentes
-occ_modelagem <- occ_unique_with_values[-c(16, 17, 18),]
-
-# Visualizando os pontos no mapa interativo
-ver_pontos(occ_modelagem, lon = 'decimalLongitude', lat = 'decimalLatitude')
-
+# Número de ocorrências dentro com valores ambientais associados
 # Número de ocorrências únicas por pixel, com valores e sem inconcistencias
 nrow(occ_modelagem)
 
+# Visualizando os pontos no mapa interativo
+ver_pontos(occ_modelagem,
+           lon = 'decimalLongitude', lat = 'decimalLatitude')
 # Salvando no disco
 write.csv(occ_modelagem, "dados/ocorrencias/ocorrencias_modelagem.csv",
           row.names = FALSE)

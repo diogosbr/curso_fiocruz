@@ -1,15 +1,9 @@
-# install.packages("raster")
-# install.packages("dismo")
-# install.packages("dplyr")
-# install.packages("rgbif")
-# install.packages("maps")
-# install.packages("CoordinateCleaner")
-# install.packages("leaflet")
-# install.packages("leaflet.extras")
-# install.packages("vroom")
-# install.packages("rJava")
+# Instalando pacotes necessários
 
-packages <- c("raster", "dismo", "dplyr", "rgbif", "maps", "CoordinateCleaner", "leaflet", "leaflet.extras", "vroom", "rJava")
+packages <- c("rJava", "raster", "dismo", "dplyr", "rgbif",
+              "leaflet","leaflet.extras", "maps", "vroom",
+              "corrplot", "caret",
+              "CoordinateCleaner")
 
 to_install <- packages[!packages %in% rownames(installed.packages())]
 

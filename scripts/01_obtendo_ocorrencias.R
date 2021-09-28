@@ -6,7 +6,7 @@ library(rgbif)
 library(dplyr)
 
 # Obtendo os pontos de ocorrência -----------------------------------------
-occ_raw <- occ_search(scientificName = "Pyropia spiralis",
+occ_raw <- occ_search(scientificName = "Euterpe edulis",
                       limit = 1e4, hasCoordinate = TRUE)
 
 # Verificando a estrutura do dado
