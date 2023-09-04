@@ -20,7 +20,6 @@ tabela_preditoras <- na.omit(preditoras[])
 
 head(tabela_preditoras)
 dim(tabela_preditoras)
-View(tabela_preditoras)
 
 # Matriz de correlação
 cor_mat <- cor(tabela_preditoras)

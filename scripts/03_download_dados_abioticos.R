@@ -7,20 +7,20 @@ library(raster)
 
 # Dados de exemplo
 # Presente
-path_from <- "dados/abioticos/world/presente/"
+path_from <- "dados/abioticos/presente/"
 path_to <- "dados/abioticos/presente/"
 
 # Futuro
-# path_from <- "dados/abioticos/world/futuro/2050_miroc_ssp245/"
+# path_from <- "dados/abioticos/futuro/2050_miroc_ssp245/"
 # path_to <- "dados/abioticos/futuro/2050_miroc_ssp245/"
 
-# path_from <- "dados/abioticos/world/futuro/2050_miroc_ssp585/"
+# path_from <- "dados/abioticos/futuro/2050_miroc_ssp585/"
 # path_to <- "dados/abioticos/futuro/2050_miroc_ssp585/"
 
-# path_from <- "dados/abioticos/world/futuro/2070_miroc_ssp245/"
+# path_from <- "dados/abioticos/futuro/2070_miroc_ssp245/"
 # path_to <- "dados/abioticos/futuro/2070_miroc_ssp245/"
 
-# path_from <- "dados/abioticos/world/futuro/2070_miroc_ssp585/"
+# path_from <- "dados/abioticos/futuro/2070_miroc_ssp585/"
 # path_to <- "dados/abioticos/futuro/2070_miroc_ssp585/"
 
 

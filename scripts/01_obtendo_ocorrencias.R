@@ -1,6 +1,3 @@
-# Instalando os pacotes ---------------------------------------------------
-source("scripts/00_instalando_pacotes.R")
-
 # Carregando os pacotes ---------------------------------------------------
 library(rgbif)
 library(dplyr)
@@ -8,9 +5,6 @@ library(dplyr)
 # Obtendo os pontos de ocorrência -----------------------------------------
 occ_raw <- occ_search(scientificName = "Euterpe edulis",
                       limit = 1e4, hasCoordinate = TRUE)
-
-# Verificando a estrutura do dado
-names(occ_raw)
 
 # Dados baixados
 names(occ_raw$data)
@@ -27,11 +21,7 @@ nrow(occ)
 # Visualizando os primeiros registros
 occ
 
-# Visualizando os dados selecionados
-View(occ)
-
 # Plotando os pontos
-par(mar = c(0,0,0,0))
 maps::map(fill = T, col = "gray80", border = F)
 maps::map.axes()
 distinct(occ) %>%

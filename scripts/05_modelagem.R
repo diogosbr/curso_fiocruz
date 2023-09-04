@@ -28,8 +28,9 @@ dim(tabela)
 modelo_bioclim <- bioclim(preditoras, occ)
 
 # Plotando o modelo bioclim
-plot(modelo_bioclim)
+plot(modelo_bioclim, a = 1, b = 2, p = 0.9)
 density(modelo_bioclim)
+response(modelo_bioclim)
 
 # Fechando o parametro grafico
 dev.off()
