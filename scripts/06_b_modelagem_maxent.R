@@ -51,7 +51,7 @@ valores_treino <- as.data.frame(extract(preditoras, occ_all_treino[,1:2]))
 occ_all_teste <- rbind(occ_teste, ausencias_teste)
 valores_teste <- as.data.frame(extract(preditoras, occ_all_teste[,1:2]))
 
-# Gerando o modelo com algoritmo bioclim
+# Gerando o modelo com algoritmo maxent
 modelo <- maxnet(occ_all_treino$pa, valores_treino)
 
 # Projetando o modelo
@@ -88,7 +88,7 @@ points(ausencias, pch = ".", col = 'red', cex = 1.5)
 if(!dir.exists("resultados")){dir.create("resultados", recursive = TRUE)}
 
 # Salvando o geotiff do modelo no disco
-writeRaster(modelo_proj, "resultados/modelo.tif")
+writeRaster(modelo_proj, "resultados/modelo.tif", overwrite = TRUE)
 
 # Salvando um PNG no disco
 png("resultados/modelo.png", width = 900, height = 400)

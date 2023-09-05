@@ -2,7 +2,7 @@
 
 packages <- c("rJava", "raster", "dismo", "dplyr", "rgbif",
               "leaflet","leaflet.extras", "maps", "vroom",
-              "corrplot", "caret",
+              "corrplot", "caret", "maxnet",
               "CoordinateCleaner")
 
 to_install <- packages[!packages %in% rownames(installed.packages())]

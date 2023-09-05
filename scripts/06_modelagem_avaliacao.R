@@ -73,7 +73,7 @@ points(ausencias, pch = ".", col = 'red', cex = 1.5)
 # Salvando o modelo -------------------------------------------------------
 
 # Salvando o geotiff do modelo no disco
-writeRaster(modelo_bioclim_proj_presente, "resultados/modelo.tif")
+writeRaster(modelo_proj, "resultados/modelo_maxent.tif", overwrite = TRUE)
 
 # Salvando um PNG no disco
 png("resultados/modelo.png", width = 900, height = 400)
