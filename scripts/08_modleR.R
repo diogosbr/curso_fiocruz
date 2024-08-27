@@ -79,5 +79,3 @@ ens <- ensemble_model(species_name = especie,
                       models_dir = "./resultados/",
                       overwrite = TRUE)
 
-
-
